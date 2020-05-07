@@ -13,7 +13,7 @@ class UserInjury implements VitalsInterface{
   DateTime dateOfInjury; 
   List<PillPrescription> medicationPrescribed; 
   HealthFacility healthFacility;
-  Injury injurySustained;
+  Injury  injurySustained;
 
   @override
   int bloodPressure;
@@ -68,7 +68,13 @@ class UserInjury implements VitalsInterface{
 
   set setRecordedOn(DateTime recordedOn){ 
     this.recordedOn = recordedOn;
-  }  
+  }   
+
+  Injury  get getInjury =>  injurySustained; 
+
+   set setInjury(Injury injurySustained){ 
+    this.injurySustained = injurySustained;
+  } 
 
   UserInjury({ 
     this.storageId, 

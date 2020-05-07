@@ -1,7 +1,8 @@
 
 enum Gender{ 
-   Male,
-  Female
+   male,
+  female,
+  other
 }
 
 class UserProfile{  

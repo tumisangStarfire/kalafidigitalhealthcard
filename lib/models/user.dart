@@ -10,7 +10,11 @@ class User{
   String email; 
   String password; 
   String status; 
-  bool verified;   
+  bool verified;
+
+  String accessToken;
+
+  DateTime expiresAt;   
 
   String get getUserId=>userId; 
 
@@ -56,7 +60,9 @@ class User{
     @required this.password,  
     this.email,
     this.status, 
-    this.verified
+    this.verified, 
+    this.accessToken, 
+    this.expiresAt
   });
 
   factory User.fromJson(Map<String,dynamic>json){  

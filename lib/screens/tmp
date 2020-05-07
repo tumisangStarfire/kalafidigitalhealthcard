@@ -1,0 +1,27 @@
+ children: <Widget>[ 
+                Card( 
+                  child: Column( 
+                    children: <Widget>[ 
+                      Text("Princess Marina Hospital",style: TextStyle(fontSize:26.0)), 
+                      Text("General Hospital",style: TextStyle(fontSize:16.0)),  
+                       Text("3908168",style: TextStyle(fontSize:11.0,color:Colors.grey)), 
+                      Row( 
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,  
+                        children: <Widget>[                       
+                           Icon(Icons.location_on,color: Colors.green,),  
+                           Text("Gaborone",style: TextStyle(fontSize:11.0)),
+                        ], 
+                      ),
+                      Row( 
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: <Widget>[ 
+                            Icon(Icons.access_time,color: Colors.grey,), 
+                            Text("Opens at: 00:00",style: TextStyle(fontSize:11.0)),
+                             Icon(Icons.access_time,color: Colors.grey,), 
+                            Text("Closes at: 00:00",style: TextStyle(fontSize:11.0)),
+                         ],
+                      )
+                    ],
+                  ),
+                ),
+              ],

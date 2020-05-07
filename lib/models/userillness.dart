@@ -1,5 +1,6 @@
 
 import 'package:flutter/foundation.dart';
+import 'package:kalafidigitalhealthcard/models/illness.dart';
 import 'package:kalafidigitalhealthcard/models/interfaces/vitalsInterface.dart';
 import 'package:kalafidigitalhealthcard/models/pillprescription.dart';
 
@@ -9,7 +10,7 @@ class UserIllness implements VitalsInterface{
 
   String storageId;//storage id object(353535swew)
   String userId;
-  String typeOfIllness;  
+  Illness typeOfIllness;  
   DateTime dateOfDiagnosis;
   String doctorsNotes;  
   List<PillPrescription> medicationPrescribed; 
@@ -39,9 +40,9 @@ class UserIllness implements VitalsInterface{
     this.userId = userId;
   }  
 
-  String get getTypeOfIllness => typeOfIllness; 
+  Illness get getTypeOfIllness => typeOfIllness; 
 
-  set setTypeofIllness(String typeOfIllness){ 
+  set setTypeofIllness(Illness typeOfIllness){ 
     this.typeOfIllness = typeOfIllness;
   } 
 

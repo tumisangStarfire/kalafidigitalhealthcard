@@ -3,7 +3,8 @@ import 'package:kalafidigitalhealthcard/models/region.dart';
 
 class Address{  
    
-    String storageId;// storageid in mongo (2233ewssddsd)
+    String storageId;// storageid in mongo (2233ewssddsd) 
+    String userId;
     String city; 
     String town; 
     String village; 
@@ -12,7 +13,11 @@ class Address{
     String ward; 
     Region region; //every address as a Region
 
-      
+  String get getUserId => userId;
+   
+  set setUserId(String userId){ 
+    this.userId =userId;
+  }
 
   String get getStorageId =>storageId; 
 
