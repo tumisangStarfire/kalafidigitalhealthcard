@@ -7,11 +7,12 @@ class FindHealthCenterScreen extends StatefulWidget {
 }
 
 class _FindHealthCenterScreenState extends State<FindHealthCenterScreen> { 
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+ /// final _scaffoldKey = GlobalKey<>(); 
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(  
-      //key:_scaffoldKey, 
+      key:_scaffoldKey, 
        appBar: _buildAppBar(),
       body: Container( 
          padding:EdgeInsets.all(20.0),  
@@ -63,9 +64,15 @@ class _FindHealthCenterScreenState extends State<FindHealthCenterScreen> {
 
    AppBar _buildAppBar() {
     return AppBar(
-      leading:IconButton(icon: Icon(Icons.menu),onPressed:(){
-        _scaffoldKey.currentState.openDrawer();
-      } ), 
+      leading: Builder( 
+        builder:  (context) => IconButton(
+          icon: Icon(Icons.menu),
+          onPressed:(){ 
+            Scaffold.of(context).openDrawer(); 
+           //// _scaffoldKey.currentState.openDrawer();
+           
+        }),
+      ),
       title: Text("Health Services"),  
       elevation: 0,
       actions: <Widget>[

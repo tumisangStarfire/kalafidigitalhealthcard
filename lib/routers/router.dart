@@ -4,6 +4,8 @@ import 'package:kalafidigitalhealthcard/screens/auth/createpassword.dart';
 import 'package:kalafidigitalhealthcard/screens/auth/login.dart';
 import 'package:kalafidigitalhealthcard/screens/auth/register.dart';
 import 'package:kalafidigitalhealthcard/screens/dashboardscreen.dart';
+import 'package:kalafidigitalhealthcard/screens/editprofile.dart';
+import 'package:kalafidigitalhealthcard/screens/emergencyservices.dart';
 import 'package:kalafidigitalhealthcard/screens/findhealthcenterscreen.dart';
 import 'package:kalafidigitalhealthcard/screens/illness/createillnessscreen.dart';
 import 'package:kalafidigitalhealthcard/screens/illness/listillnessscreen.dart';
@@ -11,8 +13,12 @@ import 'package:kalafidigitalhealthcard/screens/injury/createinjuryscreen.dart';
 import 'package:kalafidigitalhealthcard/screens/injury/listinjuryscreen.dart';
 import 'package:kalafidigitalhealthcard/screens/medicalcondition/createmedicalcondition.dart';
 import 'package:kalafidigitalhealthcard/screens/medicalcondition/medicalconditionsscreen.dart';
+import 'package:kalafidigitalhealthcard/screens/medicalfies/createmedicalfile.dart';
+import 'package:kalafidigitalhealthcard/screens/medicalfies/usersmedicalfiles.dart';
 import 'package:kalafidigitalhealthcard/screens/undefined_view.dart';
 import 'package:kalafidigitalhealthcard/screens/userpofilescreen.dart';
+import 'package:kalafidigitalhealthcard/screens/vaccince/createvaccinescreen.dart';
+import 'package:kalafidigitalhealthcard/screens/vaccince/listvaccinescreen.dart';
 import 'package:kalafidigitalhealthcard/screens/verifyotpscreen.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings){ 
@@ -29,7 +35,9 @@ Route<dynamic> generateRoute(RouteSettings routeSettings){
     case DashBoardRoute: 
         return MaterialPageRoute(builder: (context)=> DashBoardScreen());   
     case UserProfileRoute : 
-        return MaterialPageRoute(builder: (context)=> UserProfileScreen());     
+        return MaterialPageRoute(builder: (context)=> UserProfileScreen());  
+    case EditUserProfileRoute : 
+        return MaterialPageRoute(builder: (context)=> EditProfileScreen());     
     case ListUserInjuriesRoute : 
         return MaterialPageRoute(builder: (context)=> ListlInjuryScreen());  
     case CreateUserInjuryRoute : 
@@ -37,13 +45,23 @@ Route<dynamic> generateRoute(RouteSettings routeSettings){
     case ListUserIllnessRoute:  
         return MaterialPageRoute(builder: (context)=> ListIllnessScreen()); 
     case CreateUserIllnessRoute: 
-        return MaterialPageRoute(builder: (context)=> CreateIllnessScreen()); 
+        return MaterialPageRoute(builder: (context)=> CreateIllnessScreen());  
+    case ListUserVaccinesRoute: 
+        return MaterialPageRoute(builder: (context)=> ListVaccineScreen());  
+    case CreateUserVaccineRoute: 
+        return MaterialPageRoute(builder: (context)=> CreateVaccineScreen());  
     case MedicalConditionsRoute: 
         return MaterialPageRoute(builder: (context)=> MedicalConditionsScreen());  
     case CreateMedicalConditionRoute: 
-        return MaterialPageRoute(builder: (context)=> CreateMedicalConditionScreen()); 
+        return MaterialPageRoute(builder: (context)=> CreateMedicalConditionScreen());  
+    case CreateMedicalFilesRoute: 
+         return MaterialPageRoute(builder: (context)=> CreateMedicalFileScreen()); 
+    case UsersMedicalFilesRoute: 
+        return MaterialPageRoute(builder: (context)=> UsersMedicalFiles()); 
     case FindHealthCenterRoute: 
-         return MaterialPageRoute(builder: (context)=> FindHealthCenterScreen()); 
+         return MaterialPageRoute(builder: (context)=> FindHealthCenterScreen());  
+    case EmergencyServicesRoute: 
+         return MaterialPageRoute(builder: (context)=> EmergencyServicesScreen()); 
     default: 
         return MaterialPageRoute(builder: (context)=> UndefinedView());   
   } 

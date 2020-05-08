@@ -10,31 +10,40 @@ class MedicalConditionsScreen extends StatefulWidget {
 class _MedicalConditionsState extends State<MedicalConditionsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( 
+        appBar: AppBar(
+          title: Text("Existing Medical Conditions"),
+        ),  
         body:Container(  
-           decoration:BoxDecoration(color: Colors.blueGrey),
-          child:ListView( 
-            children: <Widget>[ 
-              Card( 
-                child: Column( 
-                  children: <Widget>[
-                    Text("Patient currently suffers from  acute dyfeciency  syndrome"), 
-                    Text("Diagnosed On:2010-April-01"), 
-                    Text("Private Hospital"), 
-                    Icon(Icons.more_vert),
+            decoration:BoxDecoration(color: Colors.blueGrey), 
+          child: Padding ( 
+            padding: const EdgeInsets.only (top: 10.0),  
+             child :ListView( 
+                children: <Widget>[ 
+                  Card(  
+                  child: Padding(  
+                    padding: const EdgeInsets.all (16.0), 
+                    child:  ListTile( 
+                      title: Text("Diabetes"), 
+                      subtitle :Text("Diagnosed On:2010-April-01"), 
+                      trailing: Icon(Icons.more_vert),
+                      onTap: (){
+
+                      },
+                    
+                    ),
+                  )
+             ),
                 ],
-                ) 
-              )
-            ],
-          ), 
-          
-        ), 
-        floatingActionButton: FloatingActionButton( 
-          child: Icon(Icons.add),
-          onPressed: (){ 
-              Navigator.pushNamed(context, CreateMedicalConditionRoute);
-          } 
+             ),
+          ),
         ),
+          floatingActionButton: FloatingActionButton( 
+            child: Icon(Icons.add),
+            onPressed: (){ 
+                Navigator.pushNamed(context, CreateMedicalConditionRoute);
+            } 
+          ),
     );
   }
 }

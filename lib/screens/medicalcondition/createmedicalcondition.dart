@@ -1,6 +1,8 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:kalafidigitalhealthcard/models/currentmedicalcondition.dart';
-import 'package:searchable_dropdown/searchable_dropdown.dart';
+import 'package:searchable_dropdown/searchable_dropdown.dart'; 
+import 'package:intl/intl.dart';
 
 class CreateMedicalConditionScreen extends StatefulWidget {
   @override
@@ -8,7 +10,7 @@ class CreateMedicalConditionScreen extends StatefulWidget {
 }
 
 class _CreateMedicalConditionScreenState extends State<CreateMedicalConditionScreen> {
-
+  final format = DateFormat("yyyy-MM-dd");
   final _formKey = GlobalKey<FormState>(); 
   CurrentMedicalCondition medicalCondition;
   @override
@@ -16,8 +18,8 @@ class _CreateMedicalConditionScreenState extends State<CreateMedicalConditionScr
     return Scaffold(
       body:Container( 
         padding:EdgeInsets.all(20.0), 
-        decoration:BoxDecoration(color: Colors.blueGrey),
-        child:Form( 
+       // decoration:BoxDecoration(color: Colors.blueGrey),
+        child:Form(  
           key:_formKey,
           child: ListView(
             children:_getFormWidget(),
@@ -29,7 +31,34 @@ class _CreateMedicalConditionScreenState extends State<CreateMedicalConditionScr
 
   //list of widgets to be added to the form
    List<Widget> _getFormWidget() { 
-     List<Widget> formWidget = new List();   
+     List<Widget> formWidget = new List();    
+
+     var _datePickerWidget = DateTimeField(
+          format: format, 
+          decoration: InputDecoration( 
+           labelText: 'Date of Diagnosis'
+          ),
+          onShowPicker: (context, currentValue) { 
+
+            return showDatePicker(
+                context: context,
+                firstDate: DateTime(1900),
+                initialDate: currentValue ?? DateTime.now(),
+                lastDate: DateTime(2100));
+          },      
+          validator: (value){  
+             if(value.toString() == null){ 
+                    return 'Date of Illness is required';
+                } 
+
+          },
+          onSaved: (value) {
+          setState(() {
+             medicalCondition.setDateOfDiagnosis = value;
+          });
+        },
+       );         
+
        var _conditionNameWidget=new TextFormField( 
         decoration: InputDecoration(labelText:"Enter Medical Condition Name"), 
         validator: (value){ 
@@ -68,8 +97,9 @@ class _CreateMedicalConditionScreenState extends State<CreateMedicalConditionScr
                         child: Text('Save')),
                     );
 
-      formWidget.add(_conditionNameWidget); 
-      formWidget.add(_submitButton);
+       formWidget.add(_datePickerWidget); 
+       formWidget.add(_conditionNameWidget); 
+       formWidget.add(_submitButton);
 
     return formWidget;
    }   

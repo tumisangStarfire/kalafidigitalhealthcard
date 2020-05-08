@@ -22,19 +22,27 @@ Drawer _buildDrawer(BuildContext context) {
         children: <Widget>[ 
           DrawerHeader( 
             child: Text("John Doe",style:TextStyle(color:Colors.white)),  
-            decoration: BoxDecoration( color: Colors.blueAccent),
+            decoration: BoxDecoration( 
+              image: DecorationImage(
+                image: NetworkImage("https://static1.squarespace.com/static/55f45174e4b0fb5d95b07f39/t/5aec4511aa4a991e53e6c044/1525433627644/Alexandra+Agoston+archives.jpg?format=1000w"),
+                fit: BoxFit.cover
+              )
+            ),
           ),
           ListTile(  
            leading: Icon(Icons.account_circle), 
            title: Text("profile"),
           onTap: (){ 
-              Navigator.pushNamed(context, UserProfileRoute);
+              Navigator.pushNamed(context, EditUserProfileRoute);
           },
          ),  
          ListTile(  
            leading: Icon(Icons.backup),
            title: Text("my medical files"),
-          onTap: (){},
+          onTap: (){ 
+            Navigator.pushNamed(context, UsersMedicalFilesRoute);
+          }, 
+            
          ),  
           ListTile(  
            leading: Icon(Icons.local_pharmacy),
@@ -46,7 +54,9 @@ Drawer _buildDrawer(BuildContext context) {
           ListTile(  
            leading: Icon(Icons.local_hospital),
            title: Text("emergency services"),
-          onTap: (){},
+          onTap: (){ 
+             Navigator.pushNamed(context, EmergencyServicesRoute);
+          },
          ),  
          ListTile(  
            leading: Icon(Icons.child_care),

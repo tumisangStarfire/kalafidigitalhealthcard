@@ -23,58 +23,69 @@ class LoginScreen extends StatelessWidget {
                 child: Container( 
                   child: Column(
                     children : <Widget>[
-                      TextFormField( 
-                        decoration: InputDecoration( 
-                          labelText:"Cellphone", 
-                          prefixIcon: Icon(Icons.phone,color:Colors.blueGrey),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.blueAccent,
+                      Container( 
+                        child: Padding(  
+                           padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+                           child: TextFormField( 
+                           decoration: InputDecoration( 
+                              labelText:"Cellphone", 
+                              prefixIcon: Icon(Icons.phone,color:Colors.blueGrey),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.blueAccent,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.red,
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
                           
-                          ), 
-                        keyboardType: TextInputType.number,
-                        validator: (cellphone){ 
-                          if(cellphone.trim().isEmpty){ 
-                            return 'Cellphone is required';
-                          } 
-                          if(cellphone.length > 8){ 
-                            return 'Cellphone cannot be greater than 8 characters';
-                          }
-                        },
-                      ),
-                      TextFormField( 
-                        decoration: InputDecoration( 
-                          labelText:"Password",
-                           prefixIcon: Icon(Icons.lock,color:Colors.blueGrey), 
-                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueAccent,
+                            ), 
+                            keyboardType: TextInputType.number,
+                            validator: (cellphone){ 
+                              if(cellphone.trim().isEmpty){ 
+                                return 'Cellphone is required';
+                              } 
+                              if(cellphone.length > 8){ 
+                                return 'Cellphone cannot be greater than 8 characters';
+                              }
+                            },
+                          ),
+                        )
+                      ), 
+                      Container( 
+                        child: Padding(  
+                           padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+                          child: TextFormField( 
+                          decoration: InputDecoration( 
+                            labelText:"Password",
+                            prefixIcon: Icon(Icons.lock,color:Colors.blueGrey), 
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.blueAccent,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          ),
-                        obscureText: true, 
-                        validator: (password){ 
-                          if(password.trim().isEmpty){ 
-                            return 'Password is required';
-                          }
-                        },
+                            obscureText: true, 
+                            validator: (password){ 
+                              if(password.trim().isEmpty){ 
+                                return 'Password is required';
+                              }
+                            },
+                           ),
+                        )
                       ),
+                   
                       Container( 
                         width: double.infinity,
                         margin: EdgeInsets.only(top: 20.0),

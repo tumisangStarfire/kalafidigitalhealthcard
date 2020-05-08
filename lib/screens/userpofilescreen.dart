@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalafidigitalhealthcard/routers/routerconstants.dart';
+import 'package:kalafidigitalhealthcard/screens/vaccince/listvaccinescreen.dart';
 import 'package:kalafidigitalhealthcard/widgets/_buildDrawer.dart';
 
 class UserProfileScreen extends StatelessWidget { 
@@ -75,7 +76,7 @@ class UserProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Card( 
+           /* Card( 
                 child: Column(
                   children: <Widget>[ 
                      ListTile(
@@ -85,7 +86,7 @@ class UserProfileScreen extends StatelessWidget {
                    
                   ],
                 ),
-            ), 
+            ), */
              Card( 
                 child: Column(
                   children: <Widget>[ 
@@ -121,7 +122,10 @@ class UserProfileScreen extends StatelessWidget {
                   children: <Widget>[ 
                      ListTile(
                       leading: Icon(Icons.album),
-                      title: Text('Vaccines'),
+                      title: Text('Vaccines'), 
+                      onTap: (){ 
+                        Navigator.pushNamed(context, ListUserVaccinesRoute);
+                      }
                     ), 
                    
                   ],

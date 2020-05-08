@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart'; 
 import 'package:searchable_dropdown/searchable_dropdown.dart';
-import 'package:kalafidigitalhealthcard/models/userinjury.dart';
+import 'package:kalafidigitalhealthcard/models/userinjury.dart'; 
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart'; 
+import 'package:intl/intl.dart';
 
 
 class CreateInjuryScreen extends StatefulWidget  {
@@ -11,7 +13,10 @@ class CreateInjuryScreen extends StatefulWidget  {
 
 class _CreateInjuryScreenState extends State<CreateInjuryScreen> { 
    final _formKey = GlobalKey<FormState>(); 
-    UserInjury userInjury;
+    UserInjury userInjury; 
+    DateTime selectedDate = DateTime.now(); 
+    final format = DateFormat("yyyy-MM-dd");
+    
   @override
   Widget build(BuildContext context) {
     return Scaffold( 
@@ -101,7 +106,32 @@ class _CreateInjuryScreenState extends State<CreateInjuryScreen> {
           });
         },
         isExpanded: true,
-      );                 
+      );     
+     
+       var _datePickerWidget = DateTimeField(
+          format: format, 
+           decoration: InputDecoration( 
+           labelText: 'Date of Diagnosis'
+          ),
+          onShowPicker: (context, currentValue) {
+            return showDatePicker(
+                context: context,
+                firstDate: DateTime(1900),
+                initialDate: currentValue ?? DateTime.now(),
+                lastDate: DateTime(2100));
+          },      
+          validator: (value){  
+             if(value.toString() == null){ 
+                    return 'Date of Injury is required';
+                } 
+
+          },
+          onSaved: (value) {
+          setState(() {
+             userInjury.setDateofInjury = value;
+          });
+        },
+       );                 
       /* var _medicationsWidget= new SearchableDropdown.multiple( 
           items: medicationsTemp,  
           selectedItems: selectedItems,
@@ -148,7 +178,8 @@ class _CreateInjuryScreenState extends State<CreateInjuryScreen> {
       
     formWidget.add(_bloodPressureWidget); 
     formWidget.add(_temperatureWidget); 
-    formWidget.add(_pulseRateWidget);  
+    formWidget.add(_pulseRateWidget);   
+    formWidget.add(_datePickerWidget);
     
     formWidget.add(_injuriesWidget);  
    formWidget.add(_submitButton); 

@@ -17,12 +17,15 @@ class _AppCardState extends State<AppCard> {
       children:[ 
         Card( 
           margin: EdgeInsets.all(20.0), 
-          color: Colors.blueAccent, 
+          color: Colors.blueAccent,  
+           shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              ), 
           child: Container(padding:EdgeInsets.all(20.0), 
           child: widget.child,
            decoration: BoxDecoration(
              color: Colors.white,
-             border: Border.all(color: Colors.blueAccent,width: 2)
+            // border: Border.all(color: Colors.blueAccent,width: 2)
 
            ),
           )

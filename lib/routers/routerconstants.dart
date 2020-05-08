@@ -9,7 +9,9 @@ const String VerifyOTPRoute = 'verifyotp';
 
 const String DashBoardRoute = 'dashboard'; 
 
-const String UserProfileRoute= 'userprofile'; 
+const String UserProfileRoute= 'userprofile';  
+
+const String EditUserProfileRoute = 'edituserprofile';
 
 const String ListUserInjuriesRoute= 'listuserinjuries'; 
 
@@ -21,6 +23,22 @@ const String CreateUserIllnessRoute = 'createuserillness';
 
 const String MedicalConditionsRoute = 'medicalconditions'; 
 
-const String CreateMedicalConditionRoute = 'createmedicalconditions'; 
+const String CreateMedicalConditionRoute = 'createmedicalconditions';  
 
-const String FindHealthCenterRoute = 'findhealthcenter';
+const String ListUserVaccinesRoute = 'listuservaccines'; 
+
+const String CreateUserVaccineRoute = 'createuservaccines'; 
+
+const String UsersMedicalFilesRoute = 'usersmedicalfiles';   
+
+const String CreateMedicalFilesRoute = 'createmedicalfile';
+
+const String MyMedicalExpensesRoute = 'mymedicalexpenses';  
+
+const String LifeStyleRoute = 'lifestyle';
+
+const String FindHealthCenterRoute = 'findhealthcenter';  
+
+const String EmergencyServicesRoute = 'emergencyservices';
+
+const String SettingsRoute = 'settings';
