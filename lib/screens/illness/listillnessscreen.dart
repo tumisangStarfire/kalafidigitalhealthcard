@@ -4,34 +4,37 @@ import 'package:kalafidigitalhealthcard/routers/routerconstants.dart';
 class ListIllnessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold( 
+    return Scaffold(
        appBar: AppBar(
         title: Text("History of Illness"),
-      ),   
-      body:Container( 
+      ),
+      body:Container(
          decoration:BoxDecoration(color: Colors.blueGrey),
-        child:Padding(  
+        child:Padding(
           padding: EdgeInsets.only(top: 10.0),
-          child: ListView (  
-            children: <Widget>[  
-              Card( 
-                child: ListTile(  
-                  //leading: Icon(Icons.account_circle), 
-                  title: Text("Measles"),  
+          child: ListView (
+            children: <Widget>[
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all (16.0),
+                  child:ListTile(
+                  //leading: Icon(Icons.account_circle),
+                  title: Text("Measles"),
                   subtitle: Text("2013-Mar-04"),
                   trailing: Icon(Icons.more_vert),
                   onTap: (){},
                   ),
-              ) 
+                )
+              )
             ],
-          ) , 
+          ) ,
         )
-      ), 
-      floatingActionButton: FloatingActionButton( 
+      ),
+      floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){ 
+        onPressed: (){
             Navigator.popAndPushNamed(context, CreateUserIllnessRoute);
-        } 
+        }
         ),
     );
   }

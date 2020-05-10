@@ -17,7 +17,8 @@ import 'package:kalafidigitalhealthcard/models/uservaccine.dart';
 import 'package:kalafidigitalhealthcard/models/vaccine.dart';
 
 class ApiService{ 
-  final String url = "http://mookidigitalhealth-bw.com/v1/api"; 
+ // final String url = "http://mookidigitalhealth-bw.com/v1/api";  
+  final String url = "http://127.0.0.1:3000/v1/api";
    
 
   Future<User>login(int cellphone,String password) async {  
