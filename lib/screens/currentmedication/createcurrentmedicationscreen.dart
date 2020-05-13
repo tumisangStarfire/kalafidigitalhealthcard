@@ -45,128 +45,148 @@ class _CreateCurrentMedicationScreenState extends State<CreateCurrentMedicationS
    List<Widget> _getFormWidget() {
 
      List<Widget> formWidget = new List();
-       var _pillName=new TextFormField(
-        decoration: InputDecoration(
-          labelText:"Enter Name Pill",
-           prefixIcon: Icon(Icons.timelapse,color:Colors.blueGrey),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blueAccent,
-                  ),
-                  borderRadius: BorderRadius.circular(10.0),
-                  ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.red,
-                  ),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+       var _pillName=new Container(
+         child : Padding(
+           padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+           child: TextFormField(
+            decoration: InputDecoration(
+              labelText:"Pill Name",
+              prefixIcon: Icon(Icons.timelapse,color:Colors.blueGrey),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueAccent,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+              ),
+              validator: (value){
+                  if(value.trim().isEmpty){
+                      return 'Pill name is required';
+                  }
+
+              },
+              onSaved: (value) {
+                setState(() {
+                  currentMedication.setPillName = value;
+                });
+              },
           ),
-        validator: (value){
-             if(value.trim().isEmpty){
-                return 'Pill name is required';
-             }
+         ),
+       );
 
-        },
-        onSaved: (value) {
-          setState(() {
-             currentMedication.setPillName = value;
-          });
-        },
+       var _dailyDosage=new Container(
+         child : Padding(
+           padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+           child: TextFormField(
+            decoration: InputDecoration(
+              labelText:"Daily Intake",
+              prefixIcon: Icon(Icons.timelapse,color:Colors.blueGrey),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueAccent,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+
+              ),
+              keyboardType: TextInputType.number,
+            validator: (value){
+                if(value.trim().isEmpty){
+                    return 'enter the prescribed daily intake e.g2  ';
+                }
+
+            },
+            onSaved: (value) {
+              setState(() {
+                currentMedication.setDailyDosage =int.tryParse(value);
+              });
+            },
+          ),
+         )
+       );
+
+      var _pharmaceutical=new Container(
+        child: Padding(
+          padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+          child: TextFormField(
+            decoration: InputDecoration(
+                  labelText:"Pharmaceutical/Clinic",
+                  prefixIcon: Icon(Icons.timelapse,color:Colors.blueGrey),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueAccent,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+
+            ),
+              validator: (value){
+                  if(value.trim().isEmpty){
+                      return 'Pharmaceutical/Clinic name is required';
+                  }
+
+              },
+              onSaved: (value) {
+                setState(() {
+                  currentMedication.setPharmaceutical = value;
+                });
+              },
+          ),
+        ),
       );
-
-       var _dailyDosage=new TextFormField(
-        decoration: InputDecoration(
-          labelText:"required daily intake",
-          prefixIcon: Icon(Icons.timelapse,color:Colors.blueGrey),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blueAccent,
+      var _frequency=new Container(
+        child: Padding(
+           padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+          child : TextFormField(
+          decoration: InputDecoration(
+            labelText:"Difference in Hours for intake",
+            prefixIcon: Icon(Icons.timelapse,color:Colors.blueGrey),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.blueAccent,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  errorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                  borderRadius: BorderRadius.circular(10.0),
-                  ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.red,
-                  ),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
 
           ),
           keyboardType: TextInputType.number,
-        validator: (value){
-             if(value.trim().isEmpty){
-                return 'enter the prescribed daily intake e.g2  ';
-             }
+          validator: (value){
+              if(value.trim().isEmpty){
+                  return 'every 3hrs ';
+              }
 
-        },
-        onSaved: (value) {
-          setState(() {
-             currentMedication.setDailyDosage =int.tryParse(value);
-          });
-        },
-      );
-
-      var _pharmaceutical=new TextFormField(
-        decoration: InputDecoration(
-          labelText:"Provide where you were given the medication",
-          prefixIcon: Icon(Icons.timelapse,color:Colors.blueGrey),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blueAccent,
-                  ),
-                  borderRadius: BorderRadius.circular(10.0),
-                  ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.red,
-                  ),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-
-          ),
-        validator: (value){
-             if(value.trim().isEmpty){
-                return 'Pharmaceutical/Hspita name is required';
-             }
-
-        },
-        onSaved: (value) {
-          setState(() {
-             currentMedication.setPharmaceutical = value;
-          });
-        },
-      );
-      var _frequency=new TextFormField(
-        decoration: InputDecoration(
-          labelText:"Time difference of medication intakes",
-        prefixIcon: Icon(Icons.timelapse,color:Colors.blueGrey),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blueAccent,
-                  ),
-                  borderRadius: BorderRadius.circular(10.0),
-                  ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.red,
-                  ),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-
+          },
+          onSaved: (value) {
+            setState(() {
+              currentMedication.setFrequency = int.tryParse(value);
+            });
+          },
+        )
         ),
-         keyboardType: TextInputType.number,
-        validator: (value){
-             if(value.trim().isEmpty){
-                return 'every 3hrs ';
-             }
-
-        },
-        onSaved: (value) {
-          setState(() {
-             currentMedication.setFrequency = int.tryParse(value);
-          });
-        },
       );
 
 

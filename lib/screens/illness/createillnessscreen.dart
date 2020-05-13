@@ -275,8 +275,8 @@ class _CreateIllnessScreenState extends State<CreateIllnessScreen> {
 
 
 
-    formWidget.add(_datePickerWidget); 
-    formWidget.add(_healthFacilityWidget); 
+    formWidget.add(_datePickerWidget);
+    formWidget.add(_healthFacilityWidget);
     formWidget.add(_illnesssWidget);
     formWidget.add(_bloodPressureWidget);
     formWidget.add(_temperatureWidget);

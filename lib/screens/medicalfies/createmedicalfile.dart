@@ -59,7 +59,7 @@ class _CreateMedicalFileScreenState extends State<CreateMedicalFileScreen> {
 
       var _medicalFileTypesWidget= new Container(
         child: Padding(
-          padding: null,
+          padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
           child : SearchableDropdown.single(
             items: medicalFileTemp,
             value:selected ,
@@ -74,6 +74,7 @@ class _CreateMedicalFileScreenState extends State<CreateMedicalFileScreen> {
          )
         ),
       );
+
        var _fileNameWidget = new Container(
           child : Padding(
             padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
@@ -119,7 +120,7 @@ class _CreateMedicalFileScreenState extends State<CreateMedicalFileScreen> {
             padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
             child: TextFormField(
             decoration: InputDecoration(
-              labelText:"Health Facility where you obtained the medical file",
+              labelText:"Obtained Where",
                prefixIcon: Icon(Icons.calendar_today,color:Colors.blueGrey),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(

@@ -6,7 +6,6 @@ import 'package:kalafidigitalhealthcard/screens/auth/register.dart';
 import 'package:kalafidigitalhealthcard/screens/currentmedication/createcurrentmedicationscreen.dart';
 import 'package:kalafidigitalhealthcard/screens/currentmedication/listcurrentmedicationscreen.dart';
 import 'package:kalafidigitalhealthcard/screens/dashboardscreen.dart';
-import 'package:kalafidigitalhealthcard/screens/editprofile.dart';
 import 'package:kalafidigitalhealthcard/screens/emergencyservices.dart';
 import 'package:kalafidigitalhealthcard/screens/findhealthcenterscreen.dart';
 import 'package:kalafidigitalhealthcard/screens/illness/createillnessscreen.dart';
@@ -17,6 +16,7 @@ import 'package:kalafidigitalhealthcard/screens/medicalcondition/createmedicalco
 import 'package:kalafidigitalhealthcard/screens/medicalcondition/medicalconditionsscreen.dart';
 import 'package:kalafidigitalhealthcard/screens/medicalfies/createmedicalfile.dart';
 import 'package:kalafidigitalhealthcard/screens/medicalfies/usersmedicalfiles.dart';
+import 'package:kalafidigitalhealthcard/screens/settings.dart';
 import 'package:kalafidigitalhealthcard/screens/undefined_view.dart';
 import 'package:kalafidigitalhealthcard/screens/userpofilescreen.dart';
 import 'package:kalafidigitalhealthcard/screens/vaccince/createvaccinescreen.dart';
@@ -38,8 +38,8 @@ Route<dynamic> generateRoute(RouteSettings routeSettings){
         return MaterialPageRoute(builder: (context)=> DashBoardScreen());
     case UserProfileRoute :
         return MaterialPageRoute(builder: (context)=> UserProfileScreen());
-    case EditUserProfileRoute :
-        return MaterialPageRoute(builder: (context)=> EditProfileScreen());
+    case SettingsRoute :
+        return MaterialPageRoute(builder: (context)=> SettingsScreen());
     case ListUserInjuriesRoute :
         return MaterialPageRoute(builder: (context)=> ListlInjuryScreen());
     case CreateUserInjuryRoute :

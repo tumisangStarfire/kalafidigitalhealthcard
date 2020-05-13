@@ -54,12 +54,12 @@ class _CreateInjuryScreenState extends State<CreateInjuryScreen> {
       injuriesTemp.add(DropdownMenuItem(child:Text('broken arm'),value:'broken arm'));
       //List<DropdownMenuItem>medicationsTemp=[{'name':'panado'},{'name':'paracetamol'},{'name':'anti-inflamatory'}];
       var selectedItems=[];
-      var selectedInjury ='';
+      var selectedInjury=' ';
 
        List<DropdownMenuItem>hospitalTemp =[];
       hospitalTemp.add(DropdownMenuItem(child:Text('Marina'),value:'Marina'));
       hospitalTemp.add(DropdownMenuItem(child:Text('Gaborone Private Hospital'),value:'Gaborone Private Hospital'));
-      var selected = '';
+      var selected = ' ';
 
     var _datePickerWidget =new Container(
       child : Padding(
@@ -181,7 +181,7 @@ class _CreateInjuryScreenState extends State<CreateInjuryScreen> {
       );
 
        var _pulseRateWidget=new Container(
-         child : Padding( 
+         child : Padding(
              padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
             child: TextFormField(
             decoration: InputDecoration(

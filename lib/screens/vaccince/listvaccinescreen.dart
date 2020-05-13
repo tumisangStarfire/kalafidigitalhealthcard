@@ -11,23 +11,32 @@ class ListVaccineScreen extends StatelessWidget {
       body:Container(
         decoration:BoxDecoration(color: Colors.blueGrey),
         child: Padding(
-         padding: const EdgeInsets.only (top: 10.0),
-          child :
-          Card(
-                child: Padding(
-                  padding: const EdgeInsets.all (16.0),
-                  child:  ListTile(
-                    title: Text("H1 N1"),
-                    subtitle :Text("Admisteredon On:2010-April-01"),
-                    trailing: Icon(Icons.more_vert),
-                    onTap: (){
+          padding: const EdgeInsets.only (top: 10.0),
+          child :ListView(
+            children: <Widget>[
+              Card(
+                child:Column(
+                  children: <Widget>[
+                     Padding(
+                      padding: const EdgeInsets.all (16.0),
+                      child:  ListTile(
+                        title: Text("SARS Vaccine"),
+                        isThreeLine: true,
+                        subtitle :Text("Admistered On : 2010-April-01"),
+                       // subtitle :Text('Administered A'),
+                        trailing: Icon(Icons.delete),
+                        onTap: (){
 
-                    },
+                        },
 
-                  ),
+                      ),
+                    ),
+                  ],
                 )
-             )
-        )
+              ),
+            ],
+          ),
+        ),
       ),
        floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),

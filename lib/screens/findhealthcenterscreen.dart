@@ -11,7 +11,7 @@ class FindHealthCenterScreen extends StatefulWidget {
 class _FindHealthCenterScreenState extends State<FindHealthCenterScreen> {
  /// final _scaffoldKey = GlobalKey<>();
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  var _healthFacility = HealthFacilityController.listHealthFacilities();
+  HealthFacilityController _healthFacility =  new HealthFacilityController();
 
 
   @override
@@ -24,22 +24,43 @@ class _FindHealthCenterScreenState extends State<FindHealthCenterScreen> {
         child: Column(
           children: <Widget>[
 
-            TextFormField(
-               decoration: InputDecoration(
-                 prefixIcon: Icon(Icons.search),
-                 labelText:"Search",
-                 hintText:"enter optician/clinic name/hospital "
+            Container(
+              child: Padding(
+                padding: EdgeInsets.only(top:5.0, bottom:5.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    labelText:"Search",
+                    hintText:"enter optician/clinic name/hospital ",
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueAccent,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    )
+                  ),
+
+                )
               ),
             ),
             FutureBuilder(
-               future:  HealthFacilityController.listHealthFacilities(),
+               future:  _healthFacility.listHealthFacilities(),
                builder:  (BuildContext context, AsyncSnapshot<List<HealthFacility>> snapshot) {
+                 if (snapshot.hasError) print(snapshot.error);
                  if (snapshot.hasData) {
-                    List<HealthFacility> healthFacilitiesData = snapshot.data;
+                   print(snapshot.data);
+                    var healthFacilitiesData = snapshot.data;
                      return Padding(
                        padding: EdgeInsets.all(1.0),
                        child:  Container(
                           child: _healthFacilities(healthFacilitiesData),
+
                         ),
                      );
 
@@ -57,7 +78,7 @@ class _FindHealthCenterScreenState extends State<FindHealthCenterScreen> {
     );
   }
 
-  ListView _healthFacilities(data) {
+  ListView _healthFacilities( data) {
     return ListView.builder(
       itemCount: data.length,
       itemBuilder: (context, index) {

@@ -51,7 +51,9 @@ class UserProfileScreen extends StatelessWidget {
           children: <Widget>[
             Card(
               elevation:1.0 ,
+              shape : RoundedRectangleBorder(  borderRadius: BorderRadius.circular(12.0)),
                 child: Column(
+
                   children: <Widget>[
                      ListTile(
                       leading: Icon(Icons.mood_bad),
@@ -65,6 +67,8 @@ class UserProfileScreen extends StatelessWidget {
               ),
             ),
             Card(
+               elevation:1.0 ,
+               shape : RoundedRectangleBorder(  borderRadius: BorderRadius.circular(12.0)),
               child: Column(
                 children: <Widget>[
                    ListTile(
@@ -90,6 +94,8 @@ class UserProfileScreen extends StatelessWidget {
                 ),
             ), */
              Card(
+                elevation:1.0 ,
+                shape : RoundedRectangleBorder(  borderRadius: BorderRadius.circular(12.0)),
                 child: Column(
                   children: <Widget>[
                      ListTile(
@@ -106,6 +112,8 @@ class UserProfileScreen extends StatelessWidget {
 
             ),
              Card(
+                elevation:1.0 ,
+                shape : RoundedRectangleBorder(  borderRadius: BorderRadius.circular(12.0)),
                 child: Column(
                   children: <Widget>[
                      ListTile(
@@ -120,6 +128,8 @@ class UserProfileScreen extends StatelessWidget {
                 ),
             ),
              Card(
+                elevation:1.0 ,
+               shape : RoundedRectangleBorder(  borderRadius: BorderRadius.circular(12.0)),
                 child: Column(
                   children: <Widget>[
                      ListTile(
@@ -127,6 +137,22 @@ class UserProfileScreen extends StatelessWidget {
                       title: Text('Vaccines'),
                       onTap: (){
                         Navigator.pushNamed(context, ListUserVaccinesRoute);
+                      }
+                    ),
+
+                  ],
+                ),
+            ),
+              Card(
+                elevation:1.0 ,
+               shape : RoundedRectangleBorder(  borderRadius: BorderRadius.circular(12.0)),
+                child: Column(
+                  children: <Widget>[
+                     ListTile(
+                      leading: Icon(Icons.file_upload),
+                      title: Text('Medical Files'),
+                      onTap: (){
+                        Navigator.pushNamed(context, UsersMedicalFilesRoute);
                       }
                     ),
 

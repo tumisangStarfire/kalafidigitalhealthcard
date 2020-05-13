@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AppCard extends StatefulWidget {  
-  final Widget child; 
+class AppCard extends StatefulWidget {
+  final Widget child;
 
   AppCard({Key key,@required this.child}) : super(key:key);
   @override
@@ -13,15 +13,13 @@ class _AppCardState extends State<AppCard> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.stretch, 
-      children:[ 
-        Card( 
-          margin: EdgeInsets.all(20.0), 
-          color: Colors.blueAccent,  
-           shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
-              ), 
-          child: Container(padding:EdgeInsets.all(20.0), 
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children:[
+        Card(
+          margin: EdgeInsets.all(20.0),
+          color: Colors.blueAccent,
+          shape : RoundedRectangleBorder(  borderRadius: BorderRadius.circular(12.0)),
+          child: Container(padding:EdgeInsets.all(20.0),
           child: widget.child,
            decoration: BoxDecoration(
              color: Colors.white,

@@ -122,7 +122,7 @@ class UserInjury implements VitalsInterface{
     data['dateOfInjury'] = this.dateOfInjury;
     data['bloodPressure'] = this.bloodPressure;
     data['temperature'] = this.temperature;
-    data['injurySustained'] = this.injurySustained; 
+    data['injurySustained'] = this.injurySustained;
      data['doctorsNotes'] = this.doctorsNotes;
     data['pulseRate'] = this.pulseRate;
      data['recordedOn'] = this.recordedOn;
