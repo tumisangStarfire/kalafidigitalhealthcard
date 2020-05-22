@@ -209,4 +209,5 @@ class _CreateCurrentMedicationScreenState extends State<CreateCurrentMedicationS
 
       return formWidget;
    }
+
 }

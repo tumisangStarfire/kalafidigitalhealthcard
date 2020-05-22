@@ -1,69 +1,83 @@
 import 'package:flutter/foundation.dart';
 import 'package:kalafidigitalhealthcard/models/healthfacility.dart';
 
-class CurrentMedicalCondition{ 
+class CurrentMedicalConditionList {
+  int totalResults;
+  List<CurrentMedicalCondition> results;
+
+CurrentMedicalConditionList.fromJson(Map<String, dynamic> json) {
+    totalResults = json['total_results'];
+    if (json['results'] != null) {
+      results = new List<CurrentMedicalCondition>();
+      json['results'].forEach((v) {
+        results.add(new CurrentMedicalCondition.fromJson(v));
+      });
+    }
+  }
+}
+class CurrentMedicalCondition{
 
   String storageId; //object id in Mongo (4567twtewy67343)
-  String  userId; 
-  String conditionName;  
+  String  userId;
+  String conditionName;
   DateTime dateOfDiagnosis;
-  HealthFacility healthFacility;  
+  HealthFacility healthFacility;
 
 
- String get getStorageId =>storageId; 
+ String get getStorageId =>storageId;
 
-  set setStorageId(String storageId){ 
+  set setStorageId(String storageId){
     this.storageId=storageId;
   }
-  String get getUserId => userId; 
+  String get getUserId => userId;
 
-  set setUserId(String  userId){ 
+  set setUserId(String  userId){
     this.userId =userId;
-  } 
+  }
 
-  String get getConditionName => conditionName; 
+  String get getConditionName => conditionName;
 
-  set setConditionName(String conditionName){ 
+  set setConditionName(String conditionName){
     this.conditionName =conditionName;
-  }   
+  }
 
-   DateTime get getDateOfDiagnosis => dateOfDiagnosis; 
+   DateTime get getDateOfDiagnosis => dateOfDiagnosis;
 
   set setDateOfDiagnosis(DateTime dateOfDiagnosis){
     this.dateOfDiagnosis =dateOfDiagnosis;
-  } 
+  }
 
 
- CurrentMedicalCondition({ 
-    this.storageId, 
-    this.userId,
-    @required this.conditionName, 
-    @required this.dateOfDiagnosis, 
-    @required this.healthFacility, 
-   
-  }); 
+ CurrentMedicalCondition({
+    this.storageId,
+    @required this.userId,
+    @required this.conditionName,
+    @required this.dateOfDiagnosis,
+    @required this.healthFacility,
 
- factory CurrentMedicalCondition.fromJson(Map<String,dynamic>json){  
-    return CurrentMedicalCondition( 
-           storageId : json["_id"], 
-          userId :json["userId"], 
+  });
+
+ factory CurrentMedicalCondition.fromJson(Map<String,dynamic>json){
+    return CurrentMedicalCondition(
+          storageId : json["_id"] != null ? json['_id'] : null ,
+          userId :json["userId"] != null ? json['userId'] : null ,
           conditionName : json["conditionName"],
-          dateOfDiagnosis :json["dateOfDiagnosis"],  
+          dateOfDiagnosis :DateTime.tryParse(json["dateOfDiagnosis"]),
           healthFacility : json['healthFacility'] != null ? new HealthFacility.fromJson(json['healthFacility']) : null,
-         
+
     );
-   
-  } 
+
+  }
 
    Map<String, dynamic> toJson() {
-		final Map<String, dynamic> data = new Map<String, dynamic>();  
-    data['storageId'] = this.storageId; 
-    data['userId'] = this.userId; 
-    data['conditionName'] = this.conditionName; 
-    data['dateOfDiagnosis'] = this.dateOfDiagnosis;
+		final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['storageId'] = this.storageId;
+    data['userId'] = this.userId;
+    data['conditionName'] = this.conditionName;
+    data['dateOfDiagnosis'] = this.dateOfDiagnosis.toString();
    if (this.healthFacility != null) {
       data['healthFacility'] = this.healthFacility.toJson();
-    }    
+    }
     return data;
 
 

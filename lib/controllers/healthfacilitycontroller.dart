@@ -2,15 +2,12 @@ import 'package:kalafidigitalhealthcard/models/healthfacility.dart';
 import 'package:kalafidigitalhealthcard/services/api_service.dart';
 
 class HealthFacilityController{
+  final ApiService apiService=  ApiService();
 
- Future <List<HealthFacility>> listHealthFacilities()async{
-     ApiService apiService= new ApiService();
-
-      await apiService.getHealthFacilityData().then((res)=>{
-        res
-      }).catchError((error)=>{
-         print(error.toString())
-      });
+ Future <List<HealthFacility>> listHealthFacilities() async{
+    final response =  await apiService.getHealthFacilityData();
+    return response;
 
   }
+
 }

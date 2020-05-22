@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kalafidigitalhealthcard/controllers/healthfacilitycontroller.dart';
+import 'package:kalafidigitalhealthcard/controllers/medicalconditioncontroller.dart';
 import 'package:kalafidigitalhealthcard/models/healthfacility.dart';
+import 'package:kalafidigitalhealthcard/services/api_service.dart';
 import 'package:kalafidigitalhealthcard/widgets/_buildDrawer.dart';
 
 class FindHealthCenterScreen extends StatefulWidget {
@@ -11,7 +13,10 @@ class FindHealthCenterScreen extends StatefulWidget {
 class _FindHealthCenterScreenState extends State<FindHealthCenterScreen> {
  /// final _scaffoldKey = GlobalKey<>();
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  HealthFacilityController _healthFacility =  new HealthFacilityController();
+  final HealthFacilityController _healthFcilityController = HealthFacilityController();
+ //final  ApiService apiService = ApiService();
+  //final HealthFacilityController getData = HealthFacilityController()
+  //final Future <List<HealthFacility>> _healthFacility = apiService.getHealthFacilityData(),
 
 
   @override
@@ -23,7 +28,6 @@ class _FindHealthCenterScreenState extends State<FindHealthCenterScreen> {
          padding:EdgeInsets.all(20.0),
         child: Column(
           children: <Widget>[
-
             Container(
               child: Padding(
                 padding: EdgeInsets.only(top:5.0, bottom:5.0),
@@ -46,24 +50,20 @@ class _FindHealthCenterScreenState extends State<FindHealthCenterScreen> {
                     )
                   ),
 
+
                 )
               ),
             ),
             FutureBuilder(
-               future:  _healthFacility.listHealthFacilities(),
+               future: _healthFcilityController.listHealthFacilities(),
                builder:  (BuildContext context, AsyncSnapshot<List<HealthFacility>> snapshot) {
-                 if (snapshot.hasError) print(snapshot.error);
+                 //if (snapshot.hasError) print(snapshot.error);
+
                  if (snapshot.hasData) {
-                   print(snapshot.data);
-                    var healthFacilitiesData = snapshot.data;
-                     return Padding(
-                       padding: EdgeInsets.all(1.0),
-                       child:  Container(
-                          child: _healthFacilities(healthFacilitiesData),
 
-                        ),
-                     );
-
+                    List<HealthFacility> _healthFacilitiesData = snapshot.data;
+                    // print(_healthFacilitiesData);
+                     return Expanded( child: _healthFacilities(_healthFacilitiesData));
                  }else{
                    return Center(child: CircularProgressIndicator());
                  }
@@ -80,6 +80,7 @@ class _FindHealthCenterScreenState extends State<FindHealthCenterScreen> {
 
   ListView _healthFacilities( data) {
     return ListView.builder(
+      shrinkWrap: true,
       itemCount: data.length,
       itemBuilder: (context, index) {
         return Card(
@@ -89,11 +90,11 @@ class _FindHealthCenterScreenState extends State<FindHealthCenterScreen> {
     );
   }
 
-  Column _cardData(String title, String region,){
+  Column _cardData(String title, int region,){
     return Column(
       children: <Widget>[
         Text(title,style: TextStyle(fontSize:26.0)),
-        Text(region,style: TextStyle(fontSize:16.0)),
+        Text(region.toString(),style: TextStyle(fontSize:16.0)),
         Text("3908168",style: TextStyle(fontSize:11.0,color:Colors.grey)),
          Row(                     // mainAxisAlignment: MainAxisAlignment,
            children: <Widget>[

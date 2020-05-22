@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Illness {
   int id;
   String name;
@@ -12,8 +14,9 @@ class Illness {
   bool isActive;
 
   Illness(
-      {this.id,
-      this.name,
+      {
+        @required this.id,
+      @required this.name,
       this.dataUpdatedAt,
       this.facts,
       this.symptoms,
@@ -24,19 +27,21 @@ class Illness {
       this.more,
       this.isActive});
 
-  Illness.fromJson(Map<String, dynamic> json) {
-      id = json['id'];
-     name = json['name'];
-    dataUpdatedAt = json['data_updated_at'];
-    facts = json['facts'].cast<String>();
-    symptoms = json['symptoms'];
-    transmission = json['transmission'];
-    diagnosis = json['diagnosis'];
-    treatment = json['treatment'];
-    prevention = json['prevention'];
-    more = json['more'];
-    isActive = json['is_active'];
-   
+ factory Illness.fromJson(Map<String, dynamic> json) {
+    return Illness(
+      id : json['id'],
+      name : json['name'],
+      dataUpdatedAt : json['data_updated_at'] != null ? json['data_updated_at'] : null,
+      facts : json['facts'].cast<String>() != null ? json['facts'].cast<String>() : null,
+      symptoms : json['symptoms'] != null ? json['symptoms'] : null,
+      transmission : json['transmission'] != null ? json['transmission'] : null,
+      diagnosis : json['diagnosis'] != null ? json['diagnosis'] : null,
+      treatment : json['treatment'] != null ? json['treatment'] : null,
+      prevention : json['prevention'] != null ? json['prevention'] : null,
+      more : json['more'] != null ? json['more'] : null,
+      isActive : json['is_active'] != null ? json['is_active'] : null,
+    );
+
   }
 
   Map<String, dynamic> toJson() {

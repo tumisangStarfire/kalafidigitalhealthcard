@@ -231,9 +231,10 @@ class _CreateInjuryScreenState extends State<CreateInjuryScreen> {
             searchHint: "type/name",
 
             onChanged: (value) {
-            setState(() {
-              userInjury.setUserId  = value;
-            });
+              setState(() {
+                 value;
+              });
+                userInjury.setInjury = value;
           },
           isExpanded: true,
         ),
@@ -272,8 +273,9 @@ class _CreateInjuryScreenState extends State<CreateInjuryScreen> {
             searchHint: "type/name",
             onChanged: (value) {
             setState(() {
-              userInjury.healthFacility.name = value;
+                value;
             });
+            userInjury.healthFacility.name = value;
           },
           isExpanded: true,
          )

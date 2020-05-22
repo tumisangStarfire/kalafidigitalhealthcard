@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:kalafidigitalhealthcard/models/address.dart';
+import 'package:kalafidigitalhealthcard/models/apiresponse.dart';
 import 'package:kalafidigitalhealthcard/models/currentmedicalcondition.dart';
 import 'package:kalafidigitalhealthcard/models/currentmedication.dart';
 import 'package:kalafidigitalhealthcard/models/healthfacility.dart';
@@ -17,8 +18,8 @@ import 'package:kalafidigitalhealthcard/models/uservaccine.dart';
 import 'package:kalafidigitalhealthcard/models/vaccine.dart';
 
 class ApiService{
- // final String url = "http://mookidigitalhealth-bw.com/v1/api";
-  final String url = "http://127.0.0.1:3000/v1/api";
+  final String url = "http://mookidigitalhealth-bw.com/v1/api";
+ // final String url = "http://127.0.0.1:3000/v1/api";
 
 
   Future<User>login(int cellphone,String password) async {
@@ -208,7 +209,7 @@ class ApiService{
 
 
   //save currrent prescribed medication
-  Future<dynamic> postStoreCurrentMedication(CurrentMedication currentMedication)async{
+  Future<ApiResponse> postStoreCurrentMedication(CurrentMedication currentMedication)async{
     try{
         Map<String, String> headers = {"Content-type": "application/json"};
      Response res = await post(url+"/saveCurrentMedication",headers: headers,body:currentMedication.toJson());
@@ -225,7 +226,7 @@ class ApiService{
   }
 
   //remove current medication
-  Future<String> deleteCurrentMedication(String storageId)async{
+  Future<ApiResponse> deleteCurrentMedication(String storageId)async{
     try{
         String deleteUrl =url+'/deleteCurrentMedication';
      Response res = await delete("$deleteUrl+/$storageId");
@@ -327,13 +328,14 @@ class ApiService{
       }
    }
 
-   Future<CurrentMedicalCondition> postStoreUserMedicalCondition(CurrentMedicalCondition currentMedicalCondition)async{
+   Future<ApiResponse> postStoreUserMedicalCondition(CurrentMedicalCondition currentMedicalCondition)async{
      try{
-        Map<String, String> headers = {"Content-type": "application/json"};
 
-      Response res = await post(url+'/createMedicalCondition',headers: headers,body: currentMedicalCondition.toJson());
+        Map<String, String> headers = {"Content-Type": "application/json"};
+
+      Response res = await post(url+'/saveCurrentMedicalCondition',headers: headers,body: json.encode(currentMedicalCondition.toJson()));
       if(res.statusCode == 200){
-          return CurrentMedicalCondition.fromJson(json.decode(res.body));
+           return ApiResponse.fromJson(json.decode(res.body.toString()));
         }else{
           return json.decode(res.body.toString());
         }
@@ -345,15 +347,15 @@ class ApiService{
    }
 
      ///remove user medical condition
-  Future<String> deleteUserMedicalCondition(String storageId)async{
+  Future<ApiResponse> deleteUserMedicalCondition(String storageId)async{
     try{
         String deleteUrl =url+'/deleteUserMedicalCondition';
         Response res = await delete("$deleteUrl+/$storageId");
 
         if (res.statusCode == 200) {
-            return json.decode(res.body.toString());
+            return ApiResponse.fromJson(json.decode(res.body));
         } else {
-           return json.decode(res.body.toString());
+           return ApiResponse.fromJson(json.decode(res.body));
         }
 
 
@@ -392,22 +394,7 @@ class ApiService{
     }
   }
 
-  Future <List<HealthFacility>> getHealthFacilityData() async  {
-    try{
-      Response res = await get(url+'/healthFacilityData');
 
-      if(res.statusCode ==200 ){
-        List <dynamic> healthfacilitydata =json.decode(res.body);
-        List<HealthFacility> data = healthfacilitydata.map((dynamic item) => HealthFacility.fromJson(item)).toList();
-        return data;
-      }else{
-        return json.decode(res.body);
-      }
-    }catch(error){
-         print(error);
-    }
-
-  }
 
   Future <List<CurrentMedication>> listUserMedications(String userId) async {
     try{
@@ -443,6 +430,7 @@ class ApiService{
 
   }
 
+
    Future <List<UserVaccine>> listUserVaccines(String userId) async {
     try{
          Response res = await get(url+"/listUserVaccines/$userId");
@@ -460,13 +448,32 @@ class ApiService{
 
   }
 
+Future <List<HealthFacility>> getHealthFacilityData() async  {
+    try{
+      Response res = await get(url+'/healthFacilityData');
+
+      if(res.statusCode ==200 ){
+        List <dynamic> healthfacilitydata =json.decode(res.body.toString());
+       // print(healthfacilitydata);
+        List<HealthFacility> data = healthfacilitydata.map((dynamic item) => HealthFacility.fromJson(item)).toList();
+        return data;
+      }else{
+        return json.decode(res.body);
+      }
+    }catch(error){
+         print(error);
+    }
+
+  }
+
   //TO DO: review codebb
-  Future<List<Illness>> getIllnessData() async{
+  Future <List<Illness>> getIllnessData() async {
     try{
         Response res = await get(url+'/getAPIIllness');
         if(res.statusCode == 200){
           List<dynamic> illnessData = json.decode(res.body);
           List<Illness> data = illnessData.map((dynamic item) =>Illness.fromJson(item)).toList();
+          print(data);
           return data;
         }else{
           return json.decode(res.body);

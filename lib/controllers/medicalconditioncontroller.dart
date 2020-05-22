@@ -1,37 +1,24 @@
+import 'package:kalafidigitalhealthcard/models/apiresponse.dart';
 import 'package:kalafidigitalhealthcard/models/currentmedicalcondition.dart';
 import 'package:kalafidigitalhealthcard/services/api_service.dart';
 
-class MedicationConditionController{ 
+class MedicationConditionController{
+    final  ApiService  _apiService = ApiService();
 
-  static store(CurrentMedicalCondition currentMedicalCondition) async { 
-    ApiService  apiService= new ApiService();  
-
-    await apiService.postStoreUserMedicalCondition(currentMedicalCondition).then((res)=>{ 
-      res
-    }).catchError((onError)=>{ 
-      onError.toString()
-    }); 
-
-  }   
-
-   static getUserMedicalConditions(String userId) async {
-     ApiService  apiService= new ApiService();  
-
-     await apiService.listUserMedicalConditions(userId)
-     .then((res)=>{
-       res
-     }).catchError((onError)=>{
-       onError.toString()
-     });
+  Future<ApiResponse> store(CurrentMedicalCondition currentMedicalCondition) async {
+    print(currentMedicalCondition.toJson());
+    final response = await _apiService.postStoreUserMedicalCondition(currentMedicalCondition);
+    return response;
   }
 
-  static destroy(String storageId)async{ 
-    ApiService  apiService= new ApiService(); 
-
-     await apiService.deleteUserMedicalCondition(storageId).then((res)=>{ 
-        res
-      }).catchError((onError)=>{ 
-        onError.toString()
-      }); 
+   Future<List<CurrentMedicalCondition>> getUserMedicalConditions(String userId) async {
+    final response = await _apiService.listUserMedicalConditions(userId);
+    return response;
   }
-} 
+
+  Future<ApiResponse> destroy(String storageId)async{
+     final response = await _apiService.deleteUserMedicalCondition(storageId);
+     return response;
+
+  }
+}
