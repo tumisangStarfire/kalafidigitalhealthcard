@@ -413,13 +413,14 @@ class ApiService{
 
   }
 
-   Future <List<CurrentMedicalCondition>> listUserMedicalConditions(String userId) async {
+
+   Future <List<UserVaccine>> listUserVaccines(String userId) async {
     try{
-         Response res = await get(url+"/listUserMedicalConditions/$userId");
+         Response res = await get(url+"/listUserVaccines/$userId");
 
         if(res.statusCode == 200 ){
-          List <dynamic> medicalConditions = json.decode(res.body);
-          List<CurrentMedicalCondition> data = medicalConditions.map((dynamic item) => CurrentMedicalCondition.fromJson(item)).toList();
+          List <dynamic> uservaccines = json.decode(res.body);
+          List<UserVaccine> data = uservaccines.map((dynamic item) => UserVaccine.fromJson(item)).toList();
           return data;
         }else{
           return json.decode(res.body);
@@ -429,15 +430,17 @@ class ApiService{
     }
 
   }
-
-
-   Future <List<UserVaccine>> listUserVaccines(String userId) async {
+ Future <List<CurrentMedicalCondition>> listUserMedicalConditions(String userId) async {
     try{
-         Response res = await get(url+"/listUserVaccines/$userId");
+
+         Response res = await get(url+"/getUserMedicalConditionData/$userId");
 
         if(res.statusCode == 200 ){
-          List <dynamic> uservaccines = json.decode(res.body);
-          List<UserVaccine> data = uservaccines.map((dynamic item) => UserVaccine.fromJson(item)).toList();
+
+          List <dynamic> medicalConditions = json.decode(res.body.toString());
+
+          List<CurrentMedicalCondition> data = medicalConditions.map((dynamic item) => CurrentMedicalCondition.fromJson(item)).toList();
+
           return data;
         }else{
           return json.decode(res.body);

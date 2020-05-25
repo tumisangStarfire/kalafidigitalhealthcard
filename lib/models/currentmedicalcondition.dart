@@ -1,20 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:kalafidigitalhealthcard/models/healthfacility.dart';
 
-class CurrentMedicalConditionList {
-  int totalResults;
-  List<CurrentMedicalCondition> results;
-
-CurrentMedicalConditionList.fromJson(Map<String, dynamic> json) {
-    totalResults = json['total_results'];
-    if (json['results'] != null) {
-      results = new List<CurrentMedicalCondition>();
-      json['results'].forEach((v) {
-        results.add(new CurrentMedicalCondition.fromJson(v));
-      });
-    }
-  }
-}
 class CurrentMedicalCondition{
 
   String storageId; //object id in Mongo (4567twtewy67343)
@@ -61,7 +47,7 @@ class CurrentMedicalCondition{
     return CurrentMedicalCondition(
           storageId : json["_id"] != null ? json['_id'] : null ,
           userId :json["userId"] != null ? json['userId'] : null ,
-          conditionName : json["conditionName"],
+          conditionName : json["conditionName"] != null ? json['conditionName'] : null ,
           dateOfDiagnosis :DateTime.tryParse(json["dateOfDiagnosis"]),
           healthFacility : json['healthFacility'] != null ? new HealthFacility.fromJson(json['healthFacility']) : null,
 

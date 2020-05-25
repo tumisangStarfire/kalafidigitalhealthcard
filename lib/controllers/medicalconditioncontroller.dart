@@ -6,13 +6,14 @@ class MedicationConditionController{
     final  ApiService  _apiService = ApiService();
 
   Future<ApiResponse> store(CurrentMedicalCondition currentMedicalCondition) async {
-    print(currentMedicalCondition.toJson());
+
     final response = await _apiService.postStoreUserMedicalCondition(currentMedicalCondition);
     return response;
   }
 
-   Future<List<CurrentMedicalCondition>> getUserMedicalConditions(String userId) async {
+  Future<List<CurrentMedicalCondition>> getUserMedicalConditions(String userId) async {
     final response = await _apiService.listUserMedicalConditions(userId);
+    //print(response);
     return response;
   }
 
