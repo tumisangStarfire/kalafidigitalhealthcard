@@ -1,3 +1,4 @@
+import 'package:kalafidigitalhealthcard/models/apiresponse.dart';
 import 'package:kalafidigitalhealthcard/models/illness.dart';
 import 'package:kalafidigitalhealthcard/models/userillness.dart';
 import 'package:kalafidigitalhealthcard/services/api_service.dart';
@@ -5,53 +6,29 @@ import 'package:kalafidigitalhealthcard/services/api_service.dart';
 ///Controllers should all be light weight passing and retriving data
 class UserIllnessController{
 
+ ApiService  _apiService=  ApiService();
 
-  static store(UserIllness  userIllness) async {
+  Future<ApiResponse> store(UserIllness  userIllness) async {
 
-     ApiService  apiService= new ApiService();
-      await apiService.postStoreUserIllness(userIllness)
-     .then((res)=>{
-       //responseMessage.
-        res.toJson()
-     }).
-     catchError((onError)=>{
-       print(onError.toString())
-     });
-
+    final response = await _apiService.postStoreUserIllness(userIllness);
+    return response;
   }
 
-  static destroy(String storageId) async{
+  Future<ApiResponse> destroy(String storageId) async{
 
-     ApiService apiService= new ApiService();
-
-      await apiService.deleteUserIllness(storageId)
-      .then((res)=>{
-          res.toString()
-      })
-      .catchError((error)=>{
-         print(error.toString())
-      });
+    final response  = _apiService.deleteUserIllness(storageId);
+     return response;
   }
 
-  static getUserIllness(String userId)async{
-     ApiService apiService= new ApiService();
-    // List userIllness =[];
+  Future<List<UserIllness>> getUserIllness(String userId)async{
 
-      await apiService.getUserIllness(userId).then((res)=>{
-         res
-      }).catchError((error)=>{
-         print(error.toString())
-      });
+     final response = await _apiService.getUserIllness(userId);
+      return response;
   }
 
   Future <List<Illness>> listillnesses()async{
-     ApiService apiService= new ApiService();
-
-      await apiService.getIllnessData().then((res)=>{
-        res.toList()
-      }).catchError((error)=>{
-         print(error.toString())
-      });
+    final response = await _apiService.getIllnessData();
+    return response;
 
   }
 

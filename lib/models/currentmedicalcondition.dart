@@ -57,7 +57,7 @@ class CurrentMedicalCondition{
 
    Map<String, dynamic> toJson() {
 		final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['storageId'] = this.storageId;
+   // data['_id'] = this.storageId;
     data['userId'] = this.userId;
     data['conditionName'] = this.conditionName;
     data['dateOfDiagnosis'] = this.dateOfDiagnosis.toString();

@@ -190,7 +190,7 @@ class _CreateMedicalConditionScreenState extends State<CreateMedicalConditionScr
                           _formKey.currentState.save();
                            var valid = _formKey.currentState.validate();
                            if(valid == true){
-                             print(_conditionName);
+                            // print(_conditionName);
 
                                CurrentMedicalCondition usermedicalCondition = CurrentMedicalCondition(
                                  userId: "5e44126d243f4f795e8ef25b",

@@ -179,7 +179,7 @@ class ApiService{
             'profilePicture':profilePicture ,
             'userId':userId
         };
-       await post(url+'/uploadProfilePicture',headers: headers,body:json.encode(body))
+       await post(url+'/uploadProfilePicture',headers: headers,body: json.encode(body))
         .then((res)=>{
            res.body.toString()
         }).catchError((onError)=>{
@@ -212,10 +212,10 @@ class ApiService{
   Future<ApiResponse> postStoreCurrentMedication(CurrentMedication currentMedication)async{
     try{
         Map<String, String> headers = {"Content-type": "application/json"};
-     Response res = await post(url+"/saveCurrentMedication",headers: headers,body:currentMedication.toJson());
+     Response res = await post(url+"/saveCurrentMedication",headers: headers,body: json.encode(currentMedication.toJson()));
 
         if(res.statusCode == 200){
-          return json.decode(res.body);
+          return ApiResponse.fromJson(json.decode(res.body.toString()));
         }else{
           return json.decode(res.body);
         }
@@ -231,7 +231,7 @@ class ApiService{
         String deleteUrl =url+'/deleteCurrentMedication';
      Response res = await delete("$deleteUrl+/$storageId");
         if (res.statusCode == 200) {
-         return json.decode(res.body.toString());
+         return ApiResponse.fromJson(json.decode(res.body.toString()));
         } else {
           return json.decode(res.body.toString());
         }
@@ -245,7 +245,7 @@ class ApiService{
   Future<UserVaccine> postStoreUserVaccine(UserVaccine userVaccine) async{
      Map<String, String> headers = {"Content-type": "application/json"};
 
-     Response res = await post(url+'/createVaccination',headers: headers,body: userVaccine.toJson());
+     Response res = await post(url+'/createVaccination',headers: headers,body: json.encode(userVaccine.toJson()));
       if(res.statusCode == 200){
       return json.decode(res.body.toString());
     }else{
@@ -267,13 +267,13 @@ class ApiService{
     }
   }
 
-   Future<UserIllness> postStoreUserIllness(UserIllness userIllness)async{
+   Future<ApiResponse> postStoreUserIllness(UserIllness userIllness)async{
      try{
        Map<String, String> headers = {"Content-type": "application/json"};
 
-      Response res = await post(url+'/createIllness',headers: headers,body: userIllness.toJson());
+      Response res = await post(url+'/createIllness',headers: headers,body: json.encode(userIllness.toJson()));
       if(res.statusCode == 200){
-          return UserIllness.fromJson(json.decode(res.body.toString()));
+          return ApiResponse.fromJson(json.decode(res.body.toString()));
         }else{
             return json.decode(res.body.toString());
         }
@@ -283,12 +283,14 @@ class ApiService{
 
    }
 
-   Future<UserIllness> getUserIllness(String userId)async{
+   Future<List<UserIllness>> getUserIllness(String userId)async{
       try{
            Response res = await get(url+"/userIllnessData/$userId");
 
           if(res.statusCode == 200){
-            return UserIllness.fromJson(json.decode(res.body.toString()));
+             List <dynamic> userIllness = json.decode(res.body.toString());
+             List<UserIllness> data = userIllness.map((dynamic item) => UserIllness.fromJson(item)).toList();
+            return data;
           }else{
             return json.decode(res.body);
           }
@@ -299,17 +301,16 @@ class ApiService{
    }
 
     ///remove user illness
-  Future<String> deleteUserIllness(String storageId)async{
+  Future<ApiResponse> deleteUserIllness(String storageId)async{
     try{
         String deleteUrl =url+'/deleteIllness';
         Response res = await delete("$deleteUrl+/$storageId");
 
         if (res.statusCode == 200) {
-            return json.decode(res.body.toString());
+            return ApiResponse.fromJson(json.decode(res.body.toString()));
         } else {
-          return "Something went wrong please try again";
+          return ApiResponse.fromJson(json.decode(res.body.toString()));
         }
-
 
     }catch(error) {
       print(error);
@@ -320,7 +321,7 @@ class ApiService{
    Future<UserInjury> postStoreUserInjury(UserInjury userInjury)async{
      Map<String, String> headers = {"Content-type": "application/json"};
 
-     Response res = await post(url+'/createInjury',headers: headers,body: userInjury.toJson());
+     Response res = await post(url+'/createInjury',headers: headers,body: json.encode(userInjury.toJson()));
      if(res.statusCode == 200){
         return json.decode(res.body.toString());
       }else{
@@ -396,9 +397,9 @@ class ApiService{
 
 
 
-  Future <List<CurrentMedication>> listUserMedications(String userId) async {
+  Future  <List<CurrentMedication>> listUserMedications(String userId) async {
     try{
-         Response res = await get(url+"/listUserMedications/$userId");
+         Response res = await get(url+"/getUserMedicationData/$userId");
 
         if(res.statusCode == 200 ){
           List <dynamic> userMedications = json.decode(res.body);

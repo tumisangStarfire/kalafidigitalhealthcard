@@ -21,41 +21,21 @@ class _CreateIllnessScreenState extends State<CreateIllnessScreen> {
   final _formKey = GlobalKey<FormState>();
    final format = DateFormat("yyyy-MM-dd");
    // List data = List();
-    UserIllness userIllness;
-    ApiService apiService;
-    HealthFacilityController _healthFacility;
-    UserIllnessController _illnessList;
 
-     List<HealthFacility> healthFacilitydata = [];
-     List<Illness> illnessData = [];
+    String selectedHealthFacility = ' ';
 
-@override
-void initState() {
-    // TODO: implement initState
-  apiService = new ApiService();
-  //_healthFacility= new HealthFacilityController();
-  ///get Illness to drop down
+     int _bloodPressure;
+     double _temperature;
+     DateTime _dateOfDiagnosis;
+     int _pulseRate;
+     Illness _illness;
+     HealthFacility _healthFacility;
+     String _doctorsNotes;
+     String selectedIlness = '  ';
 
 
-
-
-  /**get health facilities to drop down */
-
-     apiService.getHealthFacilityData().then((value) => {
-       healthFacilitydata = value.toList()
-    }).catchError((error)=>{
-         print(error.toString())
-      });
-
-    apiService.getIllnessData().then((value) => {
-      illnessData = value
-  }).catchError((error)=>{
-      print(error.toString())
-  });
- // print(illnessData);
-    super.initState();
-
-  }
+    final HealthFacilityController _healthFcilityController = HealthFacilityController();
+    final UserIllnessController _userIllnessController = UserIllnessController();
 
   @override
   Widget build(BuildContext context) {
@@ -93,18 +73,6 @@ void initState() {
    List<Widget>_getFormWidget() {
 
      List<Widget> formWidget = new List();
-
-      List<DropdownMenuItem>illnessTemp =[];
-      illnessTemp.add(DropdownMenuItem(child:Text('malaria'),value:'head  injury'));
-      illnessTemp.add(DropdownMenuItem(child:Text('TB'),value:'broken  arm'));
-
-      var selectedIlness = '  ';
-
-       List<DropdownMenuItem>hospitalTemp =[];
-      hospitalTemp.add(DropdownMenuItem(child:Text('Marina'),value:'Marina'));
-      hospitalTemp.add(DropdownMenuItem(child:Text('Gaborone Private Hospital'),value:'Gaborone Private Hospital'));
-      var selected = '  ';
-
     var _datePickerWidget = new Container(
        child : Padding(
          padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
@@ -136,9 +104,10 @@ void initState() {
             autovalidate:false,
             validator: (date) => date == null ? 'Enter date of diagnosis' : null,
             onSaved: (value) {
-            setState(() {
-              userIllness.setDateOfDiagnosis = value;
-            });
+              setState(() {
+                value;
+              });
+              this._dateOfDiagnosis = value;
           },
         ),
        )
@@ -176,8 +145,9 @@ void initState() {
               },
               onSaved: (value) {
                   setState(() {
-                    userIllness.setBloodPressure = int.tryParse(value) ;
+                    value;
                   });
+                  this._bloodPressure =  int.tryParse(value);
               },
           ),
         )
@@ -211,10 +181,10 @@ void initState() {
                 },
                 onSaved: (value) {
                   setState(() {
-                     userIllness.setTemperture = double.tryParse(value);
+                   value;
 
                   });
-
+                   this._temperature = double.tryParse(value);
                 },
             ),
           ),
@@ -242,8 +212,9 @@ void initState() {
               ),
               onSaved: (value) {
                 setState(() {
-                  userIllness.setPulseRate = int.tryParse(value);
+                  value;
                 });
+                this._pulseRate =int.tryParse(value);
               },
             )
           )
@@ -252,49 +223,68 @@ void initState() {
     var _illnesssWidget= new Container(
           child: Padding(
             padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
-            child: new SearchableDropdown.single(
-                items: illnessData.map((val) {
-                return new DropdownMenuItem<String>(
-                       child: Text(val.name ?? "empty"), value: val.name ?? "empty");
+            child:  FutureBuilder<List<Illness>>(
+              future: _userIllnessController.listillnesses(),
+                builder: (BuildContext context, AsyncSnapshot<List<Illness>> snapshot){
+                  if (!snapshot.hasData) return SizedBox(width: 30, height: 5.0, child: LinearProgressIndicator());
+                  return Container(
+                    width: 50,
+                    child: SearchableDropdown.single(
+                          items: snapshot.data.map((val) {
+                          return new DropdownMenuItem<String>(
+                                child: Text(val.name ?? "empty"), value: val ?? "empty");
 
-            }).toList(),
-                value:selectedIlness ,
-                hint: "Select llness",
-                searchHint: "type/name",
-                onChanged: (value) {
-                  setState(() {
-                      value;
-                  });
-                userIllness.setTypeofIllness= value;
-              },
-              isExpanded: true,
+                      }).toList(),
+                          value:selectedIlness ,
+                          validator: (value) => value == null ? 'Select illness' : null,
+                          hint: "Select llness",
+                          searchHint: "type/name",
+                          onChanged: (value) {
+                            setState(() {
+                                value;
+                            });
+                          this._illness = value;
+                        },
+                        isExpanded: true,
+                      )
+                  );
+
+                }
             )
-          )
+          ),
        );
 
     var _healthFacilityWidget= new Container(
        child : Padding(
+          padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+         child: FutureBuilder<List<HealthFacility>>(
+          future: _healthFcilityController.listHealthFacilities(),
+          builder: (BuildContext context, AsyncSnapshot<List<HealthFacility>> snapshot){
+            if (!snapshot.hasData) return SizedBox(width: 30, height: 5.0, child: LinearProgressIndicator());
+              return Container(
+                    width: 50,
+                    child: SearchableDropdown.single(
+                    items: snapshot.data.map((val) => DropdownMenuItem<HealthFacility>(
+                                      child: Text(val.name),
+                                      value: val,
+                                    ))
+                                .toList(),
+                      value:selectedHealthFacility,
+                      hint: "Hospital/Clinic Name",
+                      searchHint: "type/name",
+                      validator: (value) => value == null ? 'Select where you were diagnosed' : null,
+                      onChanged: (value) {
+                        setState(() {
+                            value;
+                        });
+                        this._healthFacility = value;
 
-        padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
-         child: SearchableDropdown.single(
-            items: healthFacilitydata.map((val) {
-                return new DropdownMenuItem<String>(
-                       child: Text(val.name), value: val.name);
-
-            }).toList()
-            ,
-            value:selected,
-            hint: "Hospital/Clinic Name",
-            searchHint: "type/name",
-            onChanged: (value) {
-              setState(() {
-                value;
-              });
-              userIllness.healthFacility.name =value;
-          },
-          isExpanded: true,
-         )
-       )
+                      },
+                      isExpanded: false,
+                    )
+              );
+          }),
+       ),
     );
 
       var _doctorsNotesWidget= new Container(
@@ -305,8 +295,9 @@ void initState() {
               decoration: InputDecoration.collapsed(hintText:"Doctors Notes"),
               onSaved: (value) {
                 setState(() {
-                  userIllness.setDoctorsNotes = value;
+                   value;
                 });
+                this._doctorsNotes = value;
               },
             )
          )
@@ -326,7 +317,7 @@ void initState() {
 
     formWidget.add(_datePickerWidget);
     formWidget.add(_healthFacilityWidget);
-   // formWidget.add(_illnesssWidget);
+    formWidget.add(_illnesssWidget);
     formWidget.add(_bloodPressureWidget);
     formWidget.add(_temperatureWidget);
     formWidget.add(_pulseRateWidget);
